@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+/**
+ * Design tokens.
+ *
+ * The rule that governs everything here: meaning is carried ONLY by lime,
+ * amber and red. Everything else is neutral grey. A colour in this interface
+ * is a claim about safety, so it does not get spent on decoration.
+ */
+@theme {
+  --color-page: #0b0d0f;
+  --color-panel: #14171a;
+  --color-raised: #191d21;
+  --color-inset: #0b0d0f;
+
+  --color-hairline: #23282d;
+  --color-interactive: #2a3138;
+  --color-divider: #1b1f23;
+
+  --color-ink: #e7eaed;
+  --color-body: #b9c0c7;
+  --color-dim: #8b939c;
+  --color-faint: #5a636c;
+
+  --color-accent: #a3e635;
+  --color-accent-hover: #c0f163;
+  --color-warn: #fbbf24;
+  --color-bad: #f87171;
+
+  --color-seg-a: #39414a;
+  --color-seg-b: #2c333a;
+
+  --font-ui: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-chip: 5px;
+  --radius-card: 8px;
+}
+
+html {
+  background: var(--color-page);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-body);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+/**
+ * Tabular figures, everywhere a number appears.
+ *
+ * NAV, premiums and oracle age tick every few seconds. Without `tnum` the
+ * digits have different widths and the whole row jitters on every update,
+ * which reads as instability in a product whose entire pitch is that it is
+ * not unstable. This is not a nicety.
+ */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+}
+
+/** All-caps micro labels. */
+.label {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum';
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+/** A stale number: dimmed, with a dotted underline that invites the tooltip. */
+.stale {
+  color: var(--color-faint);
+  text-decoration: underline dotted var(--color-faint);
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+@keyframes blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0.25; }
+}
+.live-dot {
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+@keyframes rowin {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: none; }
+}
+.row-in {
+  animation: rowin 0.4s ease;
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1b1f23 25%, #23282d 50%, #1b1f23 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 4px;
+}
+
+/* Motion only where it carries information. */
+@media (prefers-reduced-motion: reduce) {
+  .live-dot, .row-in, .skeleton { animation: none; }
+}
+
+::selection {
+  background: rgba(163, 230, 53, 0.25);
+}

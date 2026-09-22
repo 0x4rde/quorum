@@ -1,0 +1,19 @@
+node_modules/
+target/
+dist/
+.env
+.env.*
+!.env.example
+.anchor/
+test-ledger/
+*.log
+keypairs/
+.devnet-faucet.json
+docs/pyth_support_request.filled.md
+
+# One-off devnet fixture scripts. Not part of the product; see .local/README.
+.local/
+
+# Working notes: the decision log and the internal audit. Useful while
+# building, not part of the delivered project.
+docs/audit_2026-09-21.md

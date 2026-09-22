@@ -1,0 +1,24 @@
+[toolchain]
+package_manager = "npm"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+quorum = "3Awpi9YyDb4432qSiBLGN9PkiSRvFYKjmpNYxy1BuRoi"
+
+[programs.devnet]
+quorum = "3Awpi9YyDb4432qSiBLGN9PkiSRvFYKjmpNYxy1BuRoi"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id_owner.json"
+
+[scripts]
+# The integration tests run under litesvm via node's test runner, not
+# ts-mocha against a validator. See package.json.
+test = "npm test"

@@ -1,0 +1,47 @@
+{
+  "name": "quorum",
+  "description": "Issuer-diversified RWA vaults on Solana: one index token against every major wrapper of an asset, priced by oracle NAV.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify-wrappers": "tsx scripts/verify_wrappers.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "deploy-preflight": "tsx scripts/deploy_preflight.ts",
+    "devnet:mocks": "tsx scripts/devnet_mocks.ts",
+    "devnet:prices": "tsx scripts/devnet_post_prices.ts",
+    "devnet:init": "tsx scripts/devnet_init.ts",
+    "devnet:demo": "tsx scripts/devnet_demo.ts",
+    "devnet:status": "tsx scripts/devnet_status.ts",
+    "devnet:sync": "tsx scripts/sync_frontend_devnet.ts",
+    "devnet:faucet": "tsx scripts/devnet_faucet.ts",
+    "devnet:smoke": "tsx scripts/devnet_smoke_ui.ts",
+    "devnet:oracle-window": "tsx scripts/devnet_set_oracle_window.ts",
+    "pyth-letter": "tsx scripts/pyth_letter.ts",
+    "fetch-logos": "tsx scripts/fetch_logos.ts",
+    "devnet:pools": "tsx scripts/devnet_pools.ts",
+    "devnet:buy": "tsx scripts/devnet_buy_with_sol.ts",
+    "devnet:feeds": "tsx scripts/devnet_set_feeds.ts",
+    "devnet:reprice": "tsx scripts/devnet_reprice_pools.ts",
+    "devnet:arm": "tsx scripts/devnet_arm_depeg.ts",
+    "devnet:depeg": "tsx scripts/devnet_check_depeg.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "dotenv": "^18.0.1",
+    "litesvm": "^0.8.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@pythnetwork/pyth-solana-receiver": "^0.16.0",
+    "@solana/spl-token": "^0.4.15",
+    "@solana/spl-token-swap": "^0.4.4",
+    "@solana/web3.js": "^1.99.0"
+  },
+  "overrides": {
+    "@solana/web3.js": "^1.99.0"
+  }
+}
