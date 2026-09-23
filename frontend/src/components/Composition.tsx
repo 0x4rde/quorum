@@ -6,20 +6,14 @@ import { Logo } from './Logo';
 /**
  * How a basket is split between its issuers.
  *
- * Categorical colour: each segment is an issuer's identity, not a magnitude,
- * so hues are assigned in a fixed order and never cycled. The three slots are
- * the reference palette's first three dark steps, validated against this
- * site's panel surface (#14171a) on all pairs: worst CVD deltaE 9.4, worst
- * normal-vision deltaE 20.9, every slot at or above 3:1 contrast. A vault
- * holds at most three issuers, so the order never runs out.
- *
- * Colour never carries identity alone: every segment is also direct-labelled
- * and listed below with its logo.
+ * Segments use the same neutral fills as the vault page's issuer bar, because
+ * they are the same object and the site's rule is that colour is a claim
+ * about safety: lime, amber and red carry meaning, nothing else does. A
+ * blue/orange/green palette here said "these hues mean something" when they
+ * only meant "index 0, 1, 2". Identity is carried where it already was — the
+ * direct on-segment label and the logo'd legend row below.
  */
-const SERIES = ['#3987e5', '#d95926', '#199e70'];
-
-/** The panel colour, used for the 2px gaps between segments. */
-const SURFACE = '#14171a';
+const SERIES = ['#39414A', '#2C333A', '#454E58'];
 
 export interface Slice {
   key: string;
@@ -36,7 +30,7 @@ export interface Slice {
 export function Composition({
   slices,
   capBps,
-  height = 34,
+  height = 30,
 }: {
   slices: Slice[];
   /** The most any one issuer may hold, drawn as a limit marker. */
@@ -49,7 +43,7 @@ export function Composition({
   return (
     <div>
       <div
-        className="relative flex w-full overflow-hidden rounded-[6px]"
+        className="relative flex w-full overflow-hidden rounded-[5px]"
         style={{ height }}
         onMouseLeave={() => setHover(null)}
       >
@@ -66,11 +60,11 @@ export function Composition({
                 // A 2px surface gap between fills, not a border, so the
                 // segment widths stay true to the data.
                 marginLeft: i === 0 ? 0 : 2,
-                filter: hover === i ? 'brightness(1.18)' : undefined,
+                filter: hover === i ? 'brightness(1.35)' : undefined,
               }}
             >
               {pct > 12 && (
-                <span className="mono truncate px-2 text-[10.5px] font-semibold text-[#0b0d0f]">
+                <span className="mono truncate px-2 text-[10.5px] text-[#B9C0C7]">
                   {pct.toFixed(0)}%
                 </span>
               )}
@@ -92,10 +86,6 @@ export function Composition({
               className="flex items-center gap-2.5 rounded-[4px] px-1 py-1 transition-colors"
               style={{ background: hover === i ? '#191D21' : undefined }}
             >
-              <span
-                className="h-2.5 w-2.5 shrink-0 rounded-[2px]"
-                style={{ background: SERIES[i % SERIES.length] }}
-              />
               <Logo wrapperKey={s.logoKey} size={18} />
               <span className="min-w-0 flex-1 truncate text-[12.5px] text-body">{s.label}</span>
               <span className="mono shrink-0 text-[12px] text-ink">{pct.toFixed(1)}%</span>

@@ -80,8 +80,11 @@ export default function Landing() {
                   <span className="mono text-[11px] text-faint">
                     {live.length} wrapper{live.length === 1 ? '' : 's'} · 0 quarantined
                   </span>
-                  <span className="mono text-[11px] text-dim">
-                    worst leg {live.reduce((a, b) => (a.depth > b.depth ? a : b)).depth}
+                  <span
+                    className="mono text-[11px] text-dim"
+                    title="Slippage cost of buying $10,000 of the thinnest wrapper in this basket"
+                  >
+                    worst leg {live.reduce((a, b) => (a.depthPct > b.depthPct ? a : b)).depth}
                   </span>
                 </div>
                 <p className="mt-2.5 text-[12.5px] leading-snug text-faint">{v.blurb}</p>
@@ -101,9 +104,9 @@ export default function Landing() {
             <div className="mb-4 h-[22px] rounded-[3px]" style={{ background: 'rgba(251,191,36,.75)' }} />
             <div className="mono mb-3 text-[26px] text-bad">−2.10%</div>
             <ul className="space-y-1.5 text-[12.5px] text-dim">
-              <li>You hold 100% of the problem.</li>
-              <li>No mechanism notices or reacts.</li>
-              <li>Exiting means selling into the same broken pool.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-bad">−</span>You hold 100% of the problem.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-bad">−</span>No mechanism notices or reacts.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-bad">−</span>Exiting means selling into the same broken pool.</li>
             </ul>
           </div>
 
@@ -118,10 +121,10 @@ export default function Landing() {
             </div>
             <div className="mono mb-3 text-[26px] text-accent">−0.59%</div>
             <ul className="space-y-1.5 text-[12.5px] text-dim">
-              <li>+ The depeg is 28% of your exposure, not 100%.</li>
-              <li>+ The wrapper stops accepting deposits automatically.</li>
-              <li>+ Anyone can be paid to trade the vault back to fair value.</li>
-              <li>+ In-kind redeem never closes.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-accent">+</span>The depeg is 28% of your exposure, not 100%.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-accent">+</span>The wrapper stops accepting deposits automatically.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-accent">+</span>Anyone can be paid to trade the vault back to fair value.</li>
+              <li className="flex gap-2.5"><span className="mono shrink-0 text-accent">+</span>In-kind redeem never closes.</li>
             </ul>
           </div>
         </div>

@@ -10,13 +10,28 @@ const LINKS = [
   { href: '/keeper', label: 'Keeper' },
 ];
 
+/**
+ * The mark is the product: a miniature basket bar — two neutral segments and
+ * one accent, unequal weights. It is the same object the vault page is built
+ * around, so the brand and the signature component are one thing.
+ */
+function Mark() {
+  return (
+    <span className="flex h-[15px] w-[22px] gap-[2px]" aria-hidden>
+      <span className="h-full flex-[38] rounded-[1.5px] bg-[#39414A]" />
+      <span className="h-full flex-[34] rounded-[1.5px] bg-[#2C333A]" />
+      <span className="h-full flex-[28] rounded-[1.5px] bg-accent" />
+    </span>
+  );
+}
+
 export function Nav() {
   const path = usePathname();
   return (
     <nav className="sticky top-0 z-20 h-14 border-b border-hairline bg-page/95 backdrop-blur">
       <div className="mx-auto flex h-full max-w-[1180px] items-center justify-between px-4 md:px-8">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="h-4 w-4 rounded-[3px]" style={{ background: 'linear-gradient(135deg,#A3E635,#39414A)' }} />
+          <Mark />
           <span className="text-[15px] font-semibold tracking-tight text-ink">Quorum</span>
         </Link>
         <div className="flex items-center gap-1">

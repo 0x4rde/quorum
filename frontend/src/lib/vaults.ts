@@ -21,6 +21,16 @@ export interface Wrapper {
   live: boolean;
   /** Measured Jupiter price impact on a $10k buy. Why it is in or out. */
   depth: string;
+  /**
+   * The same measurement as a number, for comparing.
+   *
+   * `depth` is prose: it carries the "<" in "<0.01%" and the words in "no
+   * route", which a number cannot. Comparing those strings with `>` sorts
+   * them alphabetically, and "<" sorts above every digit, so "<0.01%" reads
+   * as worse than "0.51%" and a basket reports its best leg as its worst.
+   * `Infinity` for a wrapper with no route at all.
+   */
+  depthPct: number;
   multiplierSource: MultiplierSource;
   /** Pyth feed for the wrapper itself, where one exists. Enables swap_depegged. */
   wrapperFeedId: string | null;
@@ -50,17 +60,17 @@ export const VAULTS: Vault[] = [
     wrappers: [
       {
         key: 'SPYx', issuer: 'xStocks', mint: 'XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W',
-        live: true, depth: '<0.01%', multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 8,
+        live: true, depth: '<0.01%', depthPct: 0.01, multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 8,
         wrapperFeedId: '0x2817b78438c769357182c04346fddaad1178c82f4048828fe0997c3c64624e14',
       },
       {
         key: 'SPYon', issuer: 'Ondo', mint: 'k18WJUULWheRkSpSquYGdNNmtuE2Vbw1hpuUi92ondo',
-        live: true, depth: '0.09%', multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 9,
+        live: true, depth: '0.09%', depthPct: 0.09, multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 9,
         wrapperFeedId: null,
       },
       {
         key: 'SPYbp', issuer: 'Backpack', mint: 'SPYBo66VJPFjh1pXMb9Le53kDYWTK1zzYVDeVRWtsbi',
-        live: false, depth: 'no route', multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 6,
+        live: false, depth: 'no route', depthPct: Number.POSITIVE_INFINITY, multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 6,
         wrapperFeedId: null,
         darkReason: 'Issuer has not enabled it: zero supply, transfers disabled.',
       },
@@ -76,17 +86,17 @@ export const VAULTS: Vault[] = [
     wrappers: [
       {
         key: 'MSTRx', issuer: 'xStocks', mint: 'XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ',
-        live: true, depth: '<0.01%', multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 8,
+        live: true, depth: '<0.01%', depthPct: 0.01, multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 8,
         wrapperFeedId: '0x53f95ba4e23ed15ea56083e2ee9a5eec48055d6f59033d4bb95f1ca2a2349c28',
       },
       {
         key: 'MSTRbp', issuer: 'Backpack', mint: 'MSTRdWXMeZxdE8osAQy3fA4rvTY5rgummDSMEx6U7Nz',
-        live: true, depth: '<0.01%', multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 6,
+        live: true, depth: '<0.01%', depthPct: 0.01, multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 6,
         wrapperFeedId: null,
       },
       {
         key: 'MSTRon', issuer: 'Ondo', mint: 'FSz4ouiqXpHuGPcpacZfTzbMjScoj5FfzHkiyu2ondo',
-        live: false, depth: 'no route', multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 9,
+        live: false, depth: 'no route', depthPct: Number.POSITIVE_INFINITY, multiplierSource: 'TOKEN2022_SCALED_UI', decimals: 9,
         wrapperFeedId: null,
         darkReason: 'Mint exists but has no DEX route.',
       },
@@ -102,17 +112,17 @@ export const VAULTS: Vault[] = [
     wrappers: [
       {
         key: 'PAXG', issuer: 'Paxos', mint: '5GgRAEmv8ZxF2PR5hY72Qs5x1bnQ6UK2RbTPoqJ3wSwW',
-        live: true, depth: '<0.01%', multiplierSource: 'FIXED', decimals: 6,
+        live: true, depth: '<0.01%', depthPct: 0.01, multiplierSource: 'FIXED', decimals: 6,
         wrapperFeedId: '0x273717b49430906f4b0c230e99aa1007f83758e3199edbc887c0d06c3e332494',
       },
       {
         key: 'XAUt0', issuer: 'Tether', mint: 'AymATz4TCL9sWNEEV9Kvyz45CHVhDZ6kUgjTJPzLpU9P',
-        live: true, depth: '0.02%', multiplierSource: 'FIXED', decimals: 6,
+        live: true, depth: '0.02%', depthPct: 0.02, multiplierSource: 'FIXED', decimals: 6,
         wrapperFeedId: '0x44465e17d2e9d390e70c999d5a11fda4f092847fcd2e3e5aa089d96c98a30e67',
       },
       {
         key: 'GOLD', issuer: 'Oro', mint: 'GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A',
-        live: true, depth: '0.51%', multiplierSource: 'FIXED', decimals: 6,
+        live: true, depth: '0.51%', depthPct: 0.51, multiplierSource: 'FIXED', decimals: 6,
         wrapperFeedId: null,
       },
     ],

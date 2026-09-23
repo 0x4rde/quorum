@@ -162,16 +162,12 @@ export function VaultView({ vault }: { vault: Vault }) {
               )}
               {sponsored && <Pill tone="good">Pyth-maintained</Pill>}
               {frozen && <Pill tone="warn">Not refreshing</Pill>}
-              {live && (
-                <Pill tone="neutral">
-                  Supply {live.supply.toFixed(4)} {vault.symbol}
-                </Pill>
-              )}
             </div>
 
             <p className="mt-3 text-[12px] text-faint">
               {live?.feedLabel ?? `${vault.underlying}/USD`} from Pyth
               {' · '}1 {vault.symbol} = 1 {vault.unitLabel}
+              {live && <>{' · '}supply {live.supply.toFixed(4)} {vault.symbol}</>}
               {config && (
                 <>
                   {' · '}
