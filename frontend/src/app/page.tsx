@@ -94,6 +94,37 @@ export default function Landing() {
         </div>
       </section>
 
+      {/*
+        The explainer. Poster-framed and click-to-play rather than autoplaying:
+        it carries a voiceover, and a page that starts talking at a visitor is
+        a page they close. `preload="metadata"` keeps the 10MB off the initial
+        load for everyone who does not press play.
+      */}
+      <section className="border-t border-hairline py-14">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 className="label">Watch the explainer</h2>
+          <span className="mono text-[11px] text-faint">1:39</span>
+        </div>
+        <video
+          className="mt-4 w-full rounded-[8px] border border-hairline bg-inset"
+          controls
+          preload="metadata"
+          playsInline
+          poster="/quorum-explainer-poster.jpg"
+        >
+          <source src="/quorum-explainer.mp4" type="video/mp4" />
+          Your browser cannot play this video.{' '}
+          <a href="/quorum-explainer.mp4" className="text-accent underline">
+            Download it instead
+          </a>
+          .
+        </video>
+        <p className="mt-3 max-w-[66ch] text-[12.5px] leading-relaxed text-faint">
+          The problem, a deposit made from a browser wallet against the live devnet
+          deployment, and how the oracle and the permissionless paths work.
+        </p>
+      </section>
+
       <section className="border-t border-hairline py-14">
         <h2 className="label mb-6">What happens when an issuer depegs 2.1%</h2>
         <div className="grid gap-4 md:grid-cols-2">
