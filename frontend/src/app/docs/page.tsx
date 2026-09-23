@@ -71,6 +71,40 @@ export default function Docs() {
         </div>
       </header>
 
+      {/*
+        The technical walkthrough. It lives here rather than on the landing
+        page because this is the page somebody comes to for depth, and the
+        shorter explainer already sits on the home page. Click to play: it
+        carries a voiceover, and `preload="metadata"` keeps the file off the
+        initial load for everyone who does not press play.
+      */}
+      <section className="mt-14 border-t border-divider pt-10 md:mt-20 md:pt-12">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 className="text-[21px] font-semibold tracking-[-0.01em] text-ink md:text-[24px]">
+            The walkthrough
+          </h2>
+          <span className="mono text-[11px] text-faint">2:32</span>
+        </div>
+        <p className="mt-2.5 max-w-[78ch] text-[13.5px] leading-relaxed text-body">
+          The same material as this page, in order: the unit accounting, the guards,
+          and the reason the permissionless paths lend rather than sign a route.
+        </p>
+        <video
+          className="mt-6 w-full rounded-[8px] border border-hairline bg-inset"
+          controls
+          preload="metadata"
+          playsInline
+          poster="/quorum-technical-poster.jpg"
+        >
+          <source src="/quorum-technical.mp4" type="video/mp4" />
+          Your browser cannot play this video.{' '}
+          <a href="/quorum-technical.mp4" className="text-accent underline">
+            Download it instead
+          </a>
+          .
+        </video>
+      </section>
+
       {/* ---------------------------------------------------------- */}
       <Section
         id="scales"
